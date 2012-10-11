@@ -1,0 +1,12 @@
+<ACTIONS>
+	<ACTION NAME="lispindent_indent">
+		<CODE>
+			LispIndentPlugin.indent(buffer, textArea);
+		</CODE>
+	</ACTION>
+	<ACTION NAME="lispindent_indent_newline">
+		<CODE>
+			LispIndentPlugin.insert_enter_and_indent(buffer, textArea);
+		</CODE>
+	</ACTION>
+</ACTIONS>

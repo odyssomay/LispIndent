@@ -1,0 +1,13 @@
+# general plugin information
+plugin.LispIndentPlugin.activate=startup
+plugin.LispIndentPlugin.name=LispIndent
+plugin.LispIndentPlugin.author=Jonathan Fischer Friberg
+plugin.LispIndentPlugin.version=1
+# depends on jEdit 4.4.1
+plugin.LispIndentPlugin.depend.0=jedit 04.04.99.01
+plugin.LispIndentPlugin.description=Properly indents lisp code on newline.
+plugin.LispIndentPlugin.longdescription=description.html
+
+plugin.LispIndentPlugin.menu=lispindent_indent lispindent_indent_newline
+lispindent_indent.label=Indent
+lispindent_indent_newline.label=Insert newline and indent
