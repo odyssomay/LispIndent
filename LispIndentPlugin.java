@@ -7,8 +7,6 @@ import org.gjt.sp.jedit.Buffer;
 import org.gjt.sp.jedit.textarea.TextArea;
 
 public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
-	private Indenter[] indenters;
-	
 	//static boolean is_clojure_buffer(Buffer buffer) {
 	//	String p = buffer.getPath();
 	//	return p.endsWith(".clj") || p.endsWith(".cljs");
