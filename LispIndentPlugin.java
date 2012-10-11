@@ -33,6 +33,7 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	}
 	
 	static int get_indent(int start, JEditBuffer buffer) {
+		if(start < 0) { return 0; }
 		int start_line = buffer.getLineOfOffset(start);
 		int current_line_start = buffer.getLineStartOffset(start_line);
 		int br = 0;       // bracket count
@@ -88,7 +89,7 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	}
 	
 	public static void insert_enter_and_indent(JEditBuffer buffer, TextArea textArea) {
-		int indent = get_indent(textArea.getCaretPosition(), buffer);
+		int indent = get_indent(textArea.getCaretPosition() - 1, buffer);
 		buffer.insert(textArea.getCaretPosition(), "\n");
 		buffer.insert(textArea.getCaretPosition(), build_indent_string(indent));
 	}
