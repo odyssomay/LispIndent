@@ -53,7 +53,7 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 				if(i != 0 && buffer.getText(i - 1, 1).equals("'")) { // indent as list
 					return get_bracket_indent(buffer, i);
 				}
-				else { return get_parenthesis_indent(buffer, i); }           // indent as function call
+				else { return get_parenthesis_indent(buffer, i); }   // indent as function call
 			}
 			else if(c.equals("\n") && br == 0 && cbr == 0 && pa == 0) {
 				return get_indent_of_line(buffer, buffer.getLineOfOffset(i + 1));
@@ -85,6 +85,7 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	}
 	
 	public static void insert_enter_and_indent(JEditBuffer buffer, TextArea textArea) {
+		// we need "- 1" here to skip the newline (if the caret is at the end of a line)
 		int indent = get_indent(textArea.getCaretPosition() - 1, buffer);
 		buffer.insert(textArea.getCaretPosition(), "\n");
 		buffer.insert(textArea.getCaretPosition(), build_indent_string(indent));
