@@ -93,38 +93,4 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		buffer.insert(textArea.getCaretPosition(), "\n");
 		buffer.insert(textArea.getCaretPosition(), build_indent_string(indent));
 	}
-	
-	private class Indenter extends BufferAdapter {
-		public void contentInserted(JEditBuffer buffer, int startLine, int offset, int numLines, int length) {
-			//org.gjt.sp.util.Log.log(org.gjt.sp.util.Log.DEBUG, null, "helo");
-			if(length == 1 && buffer.getText(offset, length).equals("\n")) {
-				indent_line(buffer, buffer.getLineOfOffset(offset + 1));
-			}
-			//org.gjt.sp.jedit.GUIUtilities.message(null, "hello", null);// 
-			//org.gjt.sp.util.Log.log(org.gjt.sp.util.Log.DEBUG, null, buffer.getText(offset, length));
-		}
-	} // Indenter end
-	
-	public void start_fn() {
-		org.gjt.sp.util.Log.log(org.gjt.sp.util.Log.DEBUG, null, "starting");
-		Buffer[] buffers = jEdit.getBuffers();
-		for(int i = 0; i < buffers.length; i++) {
-			Buffer buffer = buffers[i];
-			buffer.addBufferListener(new Indenter());
-		}
-	}
-	
-	public void stop_fn() {
-		Buffer[] buffers = jEdit.getBuffers();
-		for(int i = 0; i < buffers.length; i++) {
-			Buffer buffer = buffers[i];
-			BufferListener[] listeners = buffer.getBufferListeners();
-			for(int j = 1; j < listeners.length; j++) {
-				BufferListener listener = listeners[j];
-				if(listener instanceof Indenter) {
-					buffer.removeBufferListener(listener);
-				}
-			}
-		}
-	}
 }
