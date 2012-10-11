@@ -56,7 +56,6 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 				else { return get_parenthesis_indent(buffer, i); }           // indent as function call
 			}
 			else if(c.equals("\n") && br == 0 && cbr == 0 && pa == 0) {
-				//Macros.message(view, buffer.getLineOfOffset(i+1).toString());
 				return get_indent_of_line(buffer, buffer.getLineOfOffset(i + 1));
 			}
 		}
@@ -78,7 +77,6 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	}
 	
 	public static void indent(JEditBuffer buffer, TextArea textArea) {
-		//indent_line(buffer, buffer.getLineOfOffset(textArea.getCaretPosition()));
 		int[] lines = textArea.getSelectedLines();
 		for(int i = 0; i < lines.length; i++) {
 			int line = lines[i];
