@@ -19,4 +19,4 @@ options.lispindent.label=LispIndent
 
 # options default values
 LISPINDENT_OPTION_check_ending=false
-#LISPINDENT_OPTION_file_endings=.clj|.cljs
+LISPINDENT_OPTION_file_endings=.clj|.cljs
