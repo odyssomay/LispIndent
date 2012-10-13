@@ -7,10 +7,29 @@ import org.gjt.sp.jedit.Buffer;
 import org.gjt.sp.jedit.textarea.TextArea;
 
 public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
-	//static boolean is_clojure_buffer(Buffer buffer) {
-	//	String p = buffer.getPath();
-	//	return p.endsWith(".clj") || p.endsWith(".cljs");
+	public static final String OPTIONS_PREFIX = "LISPINDENT_OPTION_";
+	
+	//public static build_file_endings_regex() {
 	//}
+	
+	static boolean is_clojure_buffer(Buffer buffer) {
+		String p = buffer.getPath();
+		return p.endsWith(".clj") || p.endsWith(".cljs");
+	}
+	
+	static boolean is_lisp_indent_ending(Buffer buffer) {
+		String p = buffer.getPath();
+		String endings = jEdit.getProperty(OPTIONS_PREFIX + "file_endings");
+		return p.matches(".*(" + endings + ")\\z");
+	}
+	
+	static boolean should_use_lisp_indent(Buffer buffer) {
+		if(jEdit.getBooleanProperty(OPTIONS_PREFIX + "check_ending")) {
+			return is_clojure_buffer(buffer);
+			//return is_lisp_indent_ending(buffer);
+		}
+		else { return true; }
+	}
 	
 	static int get_line_offset(JEditBuffer buffer, int index) {
 		int line = buffer.getLineOfOffset(index);
@@ -76,18 +95,24 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		buffer.insert(line_start, build_indent_string(get_indent(line_start - 2, buffer)));
 	}
 	
-	public static void indent(JEditBuffer buffer, TextArea textArea) {
+	public static void indent(Buffer buffer, TextArea textArea) {
 		int[] lines = textArea.getSelectedLines();
-		for(int i = 0; i < lines.length; i++) {
-			int line = lines[i];
-			indent_line(buffer, line);
+		if(should_use_lisp_indent(buffer)) {
+			for(int i = 0; i < lines.length; i++) {
+				int line = lines[i];
+				indent_line(buffer, line);
+			}
 		}
+		else { buffer.indentLines(lines); }
 	}
 	
-	public static void insert_enter_and_indent(JEditBuffer buffer, TextArea textArea) {
-		// we need "- 1" here to skip the newline (if the caret is at the end of a line)
-		int indent = get_indent(textArea.getCaretPosition() - 1, buffer);
-		buffer.insert(textArea.getCaretPosition(), "\n");
-		buffer.insert(textArea.getCaretPosition(), build_indent_string(indent));
+	public static void insert_enter_and_indent(Buffer buffer, TextArea textArea) {
+		if(should_use_lisp_indent(buffer)) {
+			// we need "- 1" here to skip the newline (if the caret is at the end of a line)
+			int indent = get_indent(textArea.getCaretPosition() - 1, buffer);
+			buffer.insert(textArea.getCaretPosition(), "\n");
+			buffer.insert(textArea.getCaretPosition(), build_indent_string(indent));
+		}
+		else { textArea.insertEnterAndIndent(); }
 	}
 }

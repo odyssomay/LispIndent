@@ -11,3 +11,12 @@ plugin.LispIndentPlugin.longdescription=description.html
 plugin.LispIndentPlugin.menu=lispindent_indent lispindent_indent_newline
 lispindent_indent.label=Indent
 lispindent_indent_newline.label=Insert newline and indent
+
+#options pane
+plugin.LispIndentPlugin.option-pane=lispindent
+options.lispindent.code=new LispIndentOptionPane();
+options.lispindent.label=LispIndent
+
+# options default values
+LISPINDENT_OPTION_check_ending=false
+#LISPINDENT_OPTION_file_endings=.clj|.cljs
