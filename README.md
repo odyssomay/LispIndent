@@ -29,11 +29,8 @@ With LispIndent, it's possible to get a much more lispy indentation:
 1. Download the [plugin jar](https://github.com/odyssomay/LispIndent/blob/master/LispIndent.jar?raw=true).
 2. Put the jar in the `jars` folder in your [settings directory](http://www.jedit.org/users-guide/settings-directory.html).
 3. Start jEdit. You might have to enable LispIndent in `Plugins->Plugin manager...`.
-
-#### Optional
-
-4. Go to `Plugins->Plugin Options...`. Select `LispIndent`. Enable `Only use lisp indenting if the file name matches:`.
-5. Go to `Utilities->Global Options...`. Select `Shortcuts`. In the `Edit Shortcuts` drop-down list, choose `Plugin: LispIndent`.
+4. (optional) Go to `Plugins->Plugin Options...`. Select `LispIndent`. Enable `Only use lisp indenting if the file name matches:`.
+5. (optional) Go to `Utilities->Global Options...`. Select `Shortcuts`. In the `Edit Shortcuts` drop-down list, choose `Plugin: LispIndent`.
    Set `LispIndent: Insert newline and indent` to enter, and `LispIndent: Indent` to ctrl+i.
 
 If you don't use enter and ctrl+i in step 5, you don't have to do step 4.
