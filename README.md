@@ -28,7 +28,7 @@ With LispIndent, it's possible to get a much more lispy indentation:
 
 1. Download the [plugin jar](https://github.com/odyssomay/LispIndent/blob/master/LispIndent.jar?raw=true).
 2. Put the jar in the `jars` folder in your [settings directory](http://www.jedit.org/users-guide/settings-directory.html).
-3. Start jEdit. You might have to enable LispIndent in the plugin manager (Plugins->Plugin manager...).
+3. Start jEdit. You might have to enable LispIndent in `Plugins->Plugin manager...`.
 
 When LispIndent has been installed, two new actions will be available in the menu `Plugins->LispIndent`.
 
