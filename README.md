@@ -2,9 +2,8 @@
 
 A plugin for [jEdit](http://www.jedit.org/) that properly indents lisp code.
 
-This is needed since otherwise, code which contains any kind of brackets, or a quoted list, will fail to properly indent.
-
-This will lead to results such as:
+The in-built indenter in jEdit is very simplistic, and for good reasons!
+However, for lisp code, it leads to very inadequate results such as:
 
 ```clojure
 (let [a {:bla 3
@@ -14,7 +13,7 @@ This will lead to results such as:
   b)
 ``` 
 
-Where the correct indentation is:
+With LispIndent, it's possible to get a much more lispy indentation:
 
 ```clojure
 (let [a {:bla 3
