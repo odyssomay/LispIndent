@@ -126,10 +126,12 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	public static void indent(Buffer buffer, TextArea textArea) {
 		int[] lines = textArea.getSelectedLines();
 		if(should_use_lisp_indent(buffer)) {
+			buffer.beginCompoundEdit();
 			for(int i = 0; i < lines.length; i++) {
 				int line = lines[i];
 				indent_line(buffer, line);
 			}
+			buffer.endCompoundEdit();
 		}
 		else { buffer.indentLines(lines); }
 	}
