@@ -34,7 +34,7 @@ When LispIndent has been installed, two new actions will be available in the men
 
 You probably want to bind each of these actions to a key. This can be done in `Utilities->Global Options...`, select `shortcuts` and `Plugin: LispIndent` in the `Edit Shortcuts` drop-down list.
 
-The most convenient way to use LispIndent, is to bind `Indent` to ctrl+i, and `Insert newline and indent` to enter. 
+The most convenient way to use LispIndent, is to bind `LispIndent: Indent` to ctrl+i, and `LispIndent: Insert newline and indent` to enter. 
 This will override the default jEdit actions. 
 Since you probably don't want to use LispIndent's indenting when you are editing a non-lisp file, 
 you should enable the option `Only use lisp indenting if the file name matches:` 

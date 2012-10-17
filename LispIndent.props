@@ -9,8 +9,8 @@ plugin.LispIndentPlugin.description=Properly indents lisp code on newline.
 plugin.LispIndentPlugin.longdescription=description.html
 
 plugin.LispIndentPlugin.menu=lispindent_indent lispindent_indent_newline
-lispindent_indent.label=Indent
-lispindent_indent_newline.label=Insert newline and indent
+lispindent_indent.label=LispIndent: Indent
+lispindent_indent_newline.label=LispIndent: Insert newline and indent
 
 #options pane
 plugin.LispIndentPlugin.option-pane=lispindent
