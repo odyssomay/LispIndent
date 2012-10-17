@@ -9,14 +9,21 @@ import org.gjt.sp.jedit.textarea.TextArea;
 public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	public static final String OPTIONS_PREFIX = "LISPINDENT_OPTION_";
 	
+	static String getProperty(String name) {
+		return jEdit.getProperty(OPTIONS_PREFIX + name);
+	}
+	static boolean getBooleanProperty(String name) {
+		return jEdit.getBooleanProperty(OPTIONS_PREFIX + name);
+	}
+	
 	static boolean is_lisp_indent_ending(Buffer buffer) {
 		String p = buffer.getPath();
-		String regex = jEdit.getProperty(OPTIONS_PREFIX + "file_endings_regex");
+		String regex = getProperty("file_endings_regex");
 		return p.matches(regex);
 	}
 	
 	static boolean should_use_lisp_indent(Buffer buffer) {
-		if(jEdit.getBooleanProperty(OPTIONS_PREFIX + "check_ending")) {
+		if(getBooleanProperty("check_ending")) {
 			return is_lisp_indent_ending(buffer);
 		}
 		else { return true; }
@@ -27,8 +34,38 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		return index - buffer.getLineStartOffset(line);
 	}
 	
+	static String get_operator(JEditBuffer buffer, int index) {
+		String c;
+		int start_index = index + 1;
+		int end_index = index;
+		for(int i = index; i < buffer.getLength(); i++) {
+			end_index = i;
+			c = buffer.getText(i, 1);
+			if(c.equals(" ") || c.equals("\n")) { break; }
+		}
+		return buffer.getText(index + 1, end_index - (index + 1));
+	}
+	
+	static int get_parenthesis_indent(JEditBuffer buffer, int index) {
+		int line_offset = get_line_offset(buffer, index);
+		String op = get_operator(buffer, index);
+		if(getBooleanProperty("use_defun_indent_by_default")) {
+			if(getBooleanProperty("check_pattern_for_align_indent") &&
+				op.matches(getProperty("align_indent_pattern"))) {
+				return line_offset + op.length() + 2;
+			}
+			else { return line_offset + 2; }
+		}
+		else {
+			if(getBooleanProperty("check_pattern_for_defun_indent") &&
+				op.matches(getProperty("defun_indent_pattern"))) {
+				return line_offset + 2;
+			}
+			else { return line_offset + op.length() + 2; }
+		}
+	}
+	
 	static int get_bracket_indent(JEditBuffer buffer, int index) { return get_line_offset(buffer, index) + 1; }
-	static int get_parenthesis_indent(JEditBuffer buffer, int index) { return get_line_offset(buffer, index) + 2; }
 	
 	static int get_indent_of_line(JEditBuffer buffer, int line) {
 		int i = buffer.getLineStartOffset(line);
