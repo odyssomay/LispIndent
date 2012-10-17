@@ -1,6 +1,7 @@
 ## LispIndent
 
 A plugin for [jEdit](http://www.jedit.org/) that properly indents lisp code.
+It's targeted to clojure users, but should be usable for other lisp dialects as well.
 
 The in-built indenter in jEdit is very simplistic, and for good reasons!
 However, for lisp code, it leads to very inadequate results such as:
