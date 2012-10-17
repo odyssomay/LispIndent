@@ -2,19 +2,16 @@
 import org.gjt.sp.jedit.AbstractOptionPane;
 import org.gjt.sp.jedit.jEdit;
 
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
+import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.ButtonGroup;
-import javax.swing.JComponent;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.awt.GridBagLayout;
 
 public class LispIndentOptionPane extends AbstractOptionPane {
 	// file ending settings
