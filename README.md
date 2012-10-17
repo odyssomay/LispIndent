@@ -30,15 +30,15 @@ With LispIndent, it's possible to get a much more lispy indentation:
 2. Put the jar in the `jars` folder in your [settings directory](http://www.jedit.org/users-guide/settings-directory.html).
 3. Start jEdit. You might have to enable LispIndent in `Plugins->Plugin manager...`.
 
-When LispIndent has been installed, two new actions will be available in the menu `Plugins->LispIndent`.
+#### Optional
 
-You probably want to bind each of these actions to a key. This can be done in `Utilities->Global Options...`. Select `Shortcuts`. In the `Edit Shortcuts` drop-down list, choose `Plugin: LispIndent`.
+4. Go to `Plugins->Plugin Options...`. Select `LispIndent`. Enable `Only use lisp indenting if the file name matches:`.
+5. Go to `Utilities->Global Options...`. Select `Shortcuts`. In the `Edit Shortcuts` drop-down list, choose `Plugin: LispIndent`.
+   Set `LispIndent: Insert newline and indent` to enter, and `LispIndent: Indent` to ctrl+i.
 
-The most convenient way to use LispIndent, is to bind `LispIndent: Indent` to ctrl+i, and `LispIndent: Insert newline and indent` to enter. 
-This will override the default jEdit actions. 
-Since you probably don't want to use LispIndent's indenting when you are editing a non-lisp file, 
-you should enable the option `Only use lisp indenting if the file name matches:` 
-in `Plugins->Plugin Options...` (select LispIndent).
+If you don't use enter and ctrl+i in step 5, you don't have to do step 4.
+
+If you only want to use LispIndent occasionally, indenting can be done from the menu in `Plugins->LispIndent`.
 
 ### License
 
