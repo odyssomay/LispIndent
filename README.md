@@ -24,6 +24,22 @@ With LispIndent, it's possible to get a much more lispy indentation:
   b)
 ```
 
+### Usage
+
+1. Download the [plugin jar](https://github.com/odyssomay/LispIndent/blob/master/LispIndent.jar?raw=true).
+2. Put the jar in the `jars` folder in your [settings directory](http://www.jedit.org/users-guide/settings-directory.html).
+3. Start jEdit. You might have to enable LispIndent in the plugin manager (Plugins->Plugin manager...).
+
+When LispIndent has been installed, two new actions will be available in the menu `Plugins->LispIndent`.
+
+You probably want to bind each of these actions to a key. This can be done in `Utilities->Global Options...`, select `shortcuts` and `Plugin: LispIndent` in the `Edit Shortcuts` menu.
+
+The most convenient way to use LispIndent, is to bind `Indent` to ctrl+i, and `Insert newline and indent` to enter. 
+This will override the default jEdit actions. 
+Since you probably don't want to use LispIndent's indenting when you are editing a non-lisp file, 
+you should enable the option "Only use lisp indenting if the file name matches:" 
+in `Plugins->Plugin Options...` (select LispIndent).
+
 ### License
 
 LispIndent is licensed under the mit license:
