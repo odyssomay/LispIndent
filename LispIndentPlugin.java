@@ -9,24 +9,15 @@ import org.gjt.sp.jedit.textarea.TextArea;
 public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	public static final String OPTIONS_PREFIX = "LISPINDENT_OPTION_";
 	
-	//public static build_file_endings_regex() {
-	//}
-	
-	static boolean is_clojure_buffer(Buffer buffer) {
-		String p = buffer.getPath();
-		return p.endsWith(".clj") || p.endsWith(".cljs");
-	}
-	
 	static boolean is_lisp_indent_ending(Buffer buffer) {
 		String p = buffer.getPath();
-		String endings = jEdit.getProperty(OPTIONS_PREFIX + "file_endings");
-		return p.matches(".*(" + endings + ")\\z");
+		String regex = jEdit.getProperty(OPTIONS_PREFIX + "file_endings_regex");
+		return p.matches(regex);
 	}
 	
 	static boolean should_use_lisp_indent(Buffer buffer) {
 		if(jEdit.getBooleanProperty(OPTIONS_PREFIX + "check_ending")) {
-			return is_clojure_buffer(buffer);
-			//return is_lisp_indent_ending(buffer);
+			return is_lisp_indent_ending(buffer);
 		}
 		else { return true; }
 	}
