@@ -32,7 +32,7 @@ With LispIndent, it's possible to get a much more lispy indentation:
 
 When LispIndent has been installed, two new actions will be available in the menu `Plugins->LispIndent`.
 
-You probably want to bind each of these actions to a key. This can be done in `Utilities->Global Options...`, select `shortcuts` and `Plugin: LispIndent` in the `Edit Shortcuts` drop-down list.
+You probably want to bind each of these actions to a key. This can be done in `Utilities->Global Options...`. Select `Shortcuts`. In the `Edit Shortcuts` drop-down list, choose `Plugin: LispIndent`.
 
 The most convenient way to use LispIndent, is to bind `LispIndent: Indent` to ctrl+i, and `LispIndent: Insert newline and indent` to enter. 
 This will override the default jEdit actions. 
