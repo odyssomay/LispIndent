@@ -39,8 +39,7 @@ If you only want to use LispIndent occasionally, indenting can be done from the 
 
 ### Upgrading
 
-1. Download the latest [plugin jar](https://github.com/odyssomay/LispIndent/blob/master/LispIndent.jar?raw=true) (note: same link as above).
-2. Restart jEdit.
+To upgrade LispIndent to the latest version, repeat steps 1-3 in `Usage`.
 
 ### License
 
