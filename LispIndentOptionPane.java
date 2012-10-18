@@ -68,6 +68,10 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 	
 	void set_preset(String preset_name) {
 		LispIndentPreset preset = LispIndentPresets.get_preset(preset_name);
+		check_ending.setSelected(preset.check_ending);
+		file_endings.setText(preset.file_endings);
+		file_endings.setEnabled(preset.check_ending);
+		
 		if(preset.use_defun_indent_by_default) {
 			use_defun_indent_by_default.setSelected(true);
 		}

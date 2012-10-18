@@ -9,6 +9,8 @@ public class LispIndentPresets {
 	static LispIndentPreset get_clojure_preset() {
 		LispIndentPreset preset = new LispIndentPreset() {
 			public void init() {
+				check_ending = true;
+				file_endings = ".*\\.(clj|cljs)";
 				use_defun_indent_by_default = false;
 				check_pattern_for_defun_indent = true;
 				check_pattern_for_align_indent = false;
@@ -28,6 +30,8 @@ public class LispIndentPresets {
 	static LispIndentPreset get_none_preset() {
 		LispIndentPreset preset = new LispIndentPreset() {
 			public void init() {
+				check_ending = false;
+				file_endings = "";
 				use_defun_indent_by_default = true;
 				check_pattern_for_defun_indent = false;
 				check_pattern_for_align_indent = false;
