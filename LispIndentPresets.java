@@ -2,8 +2,24 @@
 public class LispIndentPresets {
 	
 	public static Object[] get_available() {
-		String[] available = {"none", "clojure", "scheme"};
+		String[] available = {"none", "clojure", "common lisp", "scheme"};
 		return available;
+	}
+	
+	static LispIndentPreset get_none_preset() {
+		LispIndentPreset preset = new LispIndentPreset() {
+			public void init() {
+				check_ending = false;
+				file_endings = "";
+				use_defun_indent_by_default = true;
+				check_pattern_for_defun_indent = false;
+				check_pattern_for_align_indent = false;
+				defun_indent_pattern = "";
+				align_indent_pattern = "";
+			}
+		};
+		preset.init();
+		return preset;
 	}
 	
 	static LispIndentPreset get_clojure_preset() {
@@ -27,15 +43,18 @@ public class LispIndentPresets {
 		return preset;
 	}
 	
-	static LispIndentPreset get_none_preset() {
+	static LispIndentPreset get_common_lisp_preset() {
 		LispIndentPreset preset = new LispIndentPreset() {
 			public void init() {
-				check_ending = false;
-				file_endings = "";
-				use_defun_indent_by_default = true;
-				check_pattern_for_defun_indent = false;
+				check_ending = true;
+				file_endings = ".*\\.(lsp|lisp)";
+				use_defun_indent_by_default = false;
+				check_pattern_for_defun_indent = true;
 				check_pattern_for_align_indent = false;
-				defun_indent_pattern = "";
+				defun_indent_pattern = "catch|defvar|defclass|defconstant|defcustom|defparameter|" + 
+					"defconst|define-condition|define-modify-macro|defsetf|defun|defgeneric|" + 
+					"define-setf-method|define-self-expander|defmacro|defsubst|deftype|defmethod|" + 
+					"defpackage|defstruct|dolist|dotimes|lambda|let|let\\*|prog1|prog2|unless|when";
 				align_indent_pattern = "";
 			}
 		};
@@ -52,8 +71,8 @@ public class LispIndentPresets {
 				check_pattern_for_defun_indent = true;
 				check_pattern_for_align_indent = false;
 				defun_indent_pattern = 
-					"begin|case|delay|do|lambda|let|let*|letrec|let-values|" +
-					"let*-values|sequence|let-syntax|letrec-syntax|syntax-rules|" + 
+					"begin|case|delay|do|lambda|let|let\\*|letrec|let-values|" +
+					"let\\*-values|sequence|let-syntax|letrec-syntax|syntax-rules|" + 
 					"syntax-case|call-with-input-file|with-input-from-file|" + 
 					"with-input-from-port|call-with-output-file|" + 
 					"with-output-to-file|with-output-to-port|call-with-values|dynamic-wind";
@@ -68,6 +87,7 @@ public class LispIndentPresets {
 		switch(preset_name) {
 			case "none":    return get_none_preset();
 			case "clojure": return get_clojure_preset();
+			case "common lisp": return get_common_lisp_preset();
 			case "scheme":  return get_scheme_preset();
 			default: return get_none_preset();
 		}
