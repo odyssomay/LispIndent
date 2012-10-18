@@ -22,7 +22,7 @@ options.lispindent.indent_options.label=Indent options
 # options default values
 LISPINDENT_OPTION_check_ending=false
 LISPINDENT_OPTION_use_defun_indent_by_default=true
-LISPINDENT_OPTION_file_endings_regex=^.*\\.(clj|cljs)$
+LISPINDENT_OPTION_file_endings_regex=
 
 LISPINDENT_OPTION_check_pattern_for_defun_indent=false
 LISPINDENT_OPTION_check_pattern_for_align_indent=false
