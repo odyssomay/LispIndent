@@ -37,13 +37,13 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	static String get_operator(JEditBuffer buffer, int index) {
 		String c;
 		int start_index = index + 1;
-		int end_index = index;
+		int end_index = start_index;
 		for(int i = index; i < buffer.getLength(); i++) {
-			end_index = i;
 			c = buffer.getText(i, 1);
 			if(c.equals(" ") || c.equals("\n")) { break; }
+			end_index = i;
 		}
-		return buffer.getText(index + 1, end_index - (index + 1));
+		return buffer.getText(start_index, (end_index + 1) - start_index);
 	}
 	
 	static int get_parenthesis_indent(JEditBuffer buffer, int index) {
