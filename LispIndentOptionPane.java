@@ -1,4 +1,3 @@
-
 import org.gjt.sp.jedit.AbstractOptionPane;
 import org.gjt.sp.jedit.jEdit;
 
@@ -113,8 +112,8 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 		}
 		else { use_align_indent_by_default.setSelected(true); }
 		
-		check_pattern_for_defun_indent = new JCheckBox("Indent two spaces if operator matches:");
-		check_pattern_for_align_indent = new JCheckBox("Indent to function arguments if operator matches:");
+		check_pattern_for_defun_indent = new JCheckBox("Indent two spaces if operator matches regex:");
+		check_pattern_for_align_indent = new JCheckBox("Indent to function arguments if operator matches regex:");
 		check_pattern_for_defun_indent.setSelected(getBooleanProperty("check_pattern_for_defun_indent"));
 		check_pattern_for_align_indent.setSelected(getBooleanProperty("check_pattern_for_align_indent"));
 		
