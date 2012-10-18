@@ -3,17 +3,27 @@ import org.gjt.sp.jedit.AbstractOptionPane;
 import org.gjt.sp.jedit.jEdit;
 
 import javax.swing.ButtonGroup;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
 
 public class LispIndentOptionPane extends AbstractOptionPane {
+	int p_inset = 10;
+	int c_inset = 20;
+	
 	// file ending settings
 	JCheckBox check_ending;
 	JTextField file_endings;
@@ -41,14 +51,24 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 		jEdit.setBooleanProperty(LispIndentPlugin.OPTIONS_PREFIX + name, value);
 	}
 	
-	void insert_separator() {
-		addComponent(new javax.swing.JSeparator());
+	JPanel inset_panel(JComponent component, int inset) {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.add(Box.createRigidArea(new Dimension(inset, 0)));
+		panel.add(component);
+		panel.add(Box.createRigidArea(new Dimension(inset, 0)));
+		return panel;
+	}
+	
+	void add_component(JPanel panel, JComponent component) {
+		component.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panel.add(component);
 	}
 	
 	void init_file_ending_settings() {
 		check_ending = new JCheckBox("Only use lisp indenting if the file name matches:",
 			getBooleanProperty("check_ending"));
-		file_endings = new JTextField(getProperty("file_endings_regex"), 25);
+		file_endings = new JTextField(getProperty("file_endings_regex"));
 		
 		file_endings.setEnabled(check_ending.isSelected());
 		check_ending.addActionListener(new ActionListener() {
@@ -57,8 +77,12 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 			}
 		});
 		
-		addComponent(check_ending);
-		addComponent(file_endings);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		add_component(panel, check_ending);
+		add_component(panel, inset_panel(file_endings, c_inset));
+		addComponent(inset_panel(panel, p_inset));
 	}
 	
 	void update_indent_pattern_enable() {
@@ -78,8 +102,8 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 	}
 	
 	void init_vertical_indent_settings() {
-		use_defun_indent_by_default = new JRadioButton("Indent two spaces by default");
-		use_align_indent_by_default = new JRadioButton("Indent to function arguments by default");
+		use_defun_indent_by_default = new JRadioButton("two spaces");
+		use_align_indent_by_default = new JRadioButton("to function arguments");
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(use_defun_indent_by_default);
 		bg.add(use_align_indent_by_default);
@@ -94,8 +118,8 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 		check_pattern_for_defun_indent.setSelected(getBooleanProperty("check_pattern_for_defun_indent"));
 		check_pattern_for_align_indent.setSelected(getBooleanProperty("check_pattern_for_align_indent"));
 		
-		defun_indent_pattern = new JTextArea(10, 50);
-		align_indent_pattern = new JTextArea(10, 50);
+		defun_indent_pattern = new JTextArea(10, 10);
+		align_indent_pattern = new JTextArea(10, 10);
 		defun_indent_pattern.setText(getProperty("defun_indent_pattern"));
 		align_indent_pattern.setText(getProperty("align_indent_pattern"));
 		
@@ -105,12 +129,19 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 		addPatternEnableListener(check_pattern_for_align_indent);
 		update_indent_pattern_enable();
 		
-		addComponent(use_defun_indent_by_default);
-		addComponent(use_align_indent_by_default);
-		addComponent(check_pattern_for_defun_indent);
-		addComponent(new JScrollPane(defun_indent_pattern));
-		addComponent(check_pattern_for_align_indent);
-		addComponent(new JScrollPane(align_indent_pattern));
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		add_component(panel, new JLabel("By default, indent:"));
+		add_component(panel, inset_panel(use_defun_indent_by_default, c_inset));
+		add_component(panel, inset_panel(use_align_indent_by_default, c_inset));
+		add_component(panel, check_pattern_for_defun_indent);
+		add_component(panel, inset_panel(new JScrollPane(defun_indent_pattern), c_inset));
+		add_component(panel, check_pattern_for_align_indent);
+		add_component(panel, inset_panel(new JScrollPane(align_indent_pattern), c_inset));
+		
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		add(inset_panel(panel, p_inset), c);
 	}
 	
 	public void _init() {
