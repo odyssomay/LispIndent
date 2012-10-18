@@ -144,8 +144,8 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 		check_pattern_for_defun_indent.setSelected(getBooleanProperty("check_pattern_for_defun_indent"));
 		check_pattern_for_align_indent.setSelected(getBooleanProperty("check_pattern_for_align_indent"));
 		
-		defun_indent_pattern = new JTextArea(10, 10);
-		align_indent_pattern = new JTextArea(10, 10);
+		defun_indent_pattern = new JTextArea(2, 2);
+		align_indent_pattern = new JTextArea(2, 2);
 		defun_indent_pattern.setText(getProperty("defun_indent_pattern"));
 		align_indent_pattern.setText(getProperty("align_indent_pattern"));
 		
