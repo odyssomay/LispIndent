@@ -37,6 +37,11 @@ If you don't use enter and ctrl+i in step 5, you don't have to do step 4.
 
 If you only want to use LispIndent occasionally, indenting can be done from the menu in `Plugins->LispIndent`.
 
+### Upgrading
+
+1. Download the latest [plugin jar](https://github.com/odyssomay/LispIndent/blob/master/LispIndent.jar?raw=true) (note: same link as above).
+2. Restart jEdit.
+
 ### License
 
 LispIndent is licensed under the mit license:
