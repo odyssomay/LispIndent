@@ -4,9 +4,11 @@ import org.gjt.sp.jedit.jEdit;
 import javax.swing.ButtonGroup;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -62,6 +64,31 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 	void add_component(JPanel panel, JComponent component) {
 		component.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel.add(component);
+	}
+	
+	void set_preset(String preset_name) {
+		LispIndentPreset preset = LispIndentPresets.get_preset(preset_name);
+		if(preset.use_defun_indent_by_default) {
+			use_defun_indent_by_default.setSelected(true);
+		}
+		else { use_align_indent_by_default.setSelected(true); }
+		check_pattern_for_defun_indent.setSelected(preset.check_pattern_for_defun_indent);
+		check_pattern_for_align_indent.setSelected(preset.check_pattern_for_align_indent);
+		defun_indent_pattern.setText(preset.defun_indent_pattern);
+		align_indent_pattern.setText(preset.align_indent_pattern);
+		update_indent_pattern_enable();
+	}
+	
+	void init_preset_settings() {
+		JButton button = new JButton("Use Preset");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object selection = JOptionPane.showInputDialog(getComponent(), "Select preset.", "",
+					JOptionPane.PLAIN_MESSAGE, null, LispIndentPresets.get_available(), "none");
+				set_preset((String)selection);
+			}
+		});
+		addComponent(inset_panel(button, p_inset));
 	}
 	
 	void init_file_ending_settings() {
@@ -144,6 +171,7 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 	}
 	
 	public void _init() {
+		init_preset_settings();
 		addSeparator("options.lispindent.file_ending_options.label");
 		init_file_ending_settings();
 		addSeparator("options.lispindent.indent_options.label");
