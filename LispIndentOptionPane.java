@@ -83,16 +83,42 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 		update_indent_pattern_enable();
 	}
 	
-	void init_preset_settings() {
-		JButton button = new JButton("Use Preset");
+	JButton get_preset_button() {
+		JButton button = new JButton("Select language");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object selection = JOptionPane.showInputDialog(getComponent(), "Select preset.", "",
+				Object selection = JOptionPane.showInputDialog(getComponent(), 
+					"Select your language.\n\nWARNING: This will erase all your current settings.", "",
 					JOptionPane.PLAIN_MESSAGE, null, LispIndentPresets.get_available(), "none");
 				set_preset((String)selection);
 			}
 		});
-		addComponent(inset_panel(button, p_inset));
+		return button;
+	}
+	
+	void show_webpage_dialog() {
+		JTextArea ta = new JTextArea(1, 40);
+		ta.setText("https://github.com/odyssomay/LispIndent");
+		ta.setEditable(false);
+		JOptionPane.showMessageDialog(getComponent(), ta);
+	}
+	
+	JButton get_visit_webpage_button() {
+		JButton button = new JButton("Visit LispIndent webpage");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+				if(desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
+					try {
+						java.net.URI uri = new java.net.URI("https://github.com/odyssomay/LispIndent");
+						desktop.browse(uri);
+					}
+					catch(Exception e) { show_webpage_dialog(); }
+				}
+				else { show_webpage_dialog(); }
+			}
+		});
+		return button;
 	}
 	
 	void init_file_ending_settings() {
@@ -175,7 +201,7 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 	}
 	
 	public void _init() {
-		init_preset_settings();
+		addComponent(get_help_panel());
 		addSeparator("options.lispindent.file_ending_options.label");
 		init_file_ending_settings();
 		addSeparator("options.lispindent.indent_options.label");
@@ -198,5 +224,21 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 	public void _save() {
 		save_file_ending_settings();
 		save_vertical_indent_settings();
+	}
+	
+	JPanel get_help_panel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		panel.add(new JLabel("To get help and info about LispIndent, click below."));
+		panel.add(get_visit_webpage_button());
+		
+		panel.add(new JLabel("To get started, select a language by clicking below."));
+		panel.add(get_preset_button());
+		
+		JPanel outer_panel = new JPanel();
+		outer_panel.setLayout(new BoxLayout(outer_panel, BoxLayout.Y_AXIS));
+		outer_panel.add(inset_panel(panel, p_inset));
+		return outer_panel;
 	}
 }
