@@ -84,7 +84,7 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 	}
 	
 	JButton get_preset_button() {
-		JButton button = new JButton("Select language");
+		JButton button = new JButton("Use preset");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object selection = JOptionPane.showInputDialog(getComponent(), 
@@ -233,7 +233,7 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 		panel.add(new JLabel("To get help and info about LispIndent, click below."));
 		panel.add(get_visit_webpage_button());
 		
-		panel.add(new JLabel("To get started, select a language by clicking below."));
+		panel.add(new JLabel("To get started, select a preset for your language by clicking below."));
 		panel.add(get_preset_button());
 		
 		JPanel outer_panel = new JPanel();
