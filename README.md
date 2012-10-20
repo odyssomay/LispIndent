@@ -24,7 +24,7 @@ With LispIndent, it's possible to get a much more lispy indentation:
   b)
 ```
 
-### Getting started
+## Getting started
 
 1. Download the [plugin jar](https://github.com/odyssomay/LispIndent/blob/master/LispIndent.jar?raw=true).
 2. Put the jar in the `jars` folder in your [settings directory](http://www.jedit.org/users-guide/settings-directory.html).
@@ -38,13 +38,36 @@ If you only want to use LispIndent occasionally, indenting can be done from the 
 
 To upgrade LispIndent to the latest version, repeat steps 1-3 in [Getting started](#getting-started).
 
+## Configuration
+
+Most configuration is done in the plugin options.
+They can be accessed in `Plugins->Plugin Options...`, select `LispIndent`.
+
 ### Key bindings
+
+LispIndent does not automatically set up key bindings.
+To do this, go to `Utilities->Global Options...`. Select `Shortcuts`.
+In the `Edit Shortcuts` drop-down list, select `Plugin: LispIndent`.
+
+You can of course use any key you like for the LispIndent actions,
+but this scheme is recommended:
+
+- `enter` for `LispIndent: Insert enter and indent`.
+- `ctrl + i` for `LispIndent: Indent`.
 
 ### Presets
 
-### Configuration
+Different lisp languages is not automatically detected.
+There are however presets that tailors the indenting specifically
+for a certain language.
 
-All configuration is done in `Plugins->Plugin Options...`. Select `LispIndent`.
+To use a preset, click the `Use preset` button in the plugin options.
+
+If your language is not one of the available, use the `none` preset or
+manually configure LispIndent (see [Plugin options](#plugin-options) below).
+If you'd like your language to be available, please contact [me](https://github.com/odyssomay).
+
+### Plugin options
 
 #### File ending options
 
