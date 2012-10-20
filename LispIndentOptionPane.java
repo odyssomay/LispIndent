@@ -122,7 +122,7 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 	}
 	
 	void init_file_ending_settings() {
-		check_ending = new JCheckBox("Only use lisp indenting if the file name matches:",
+		check_ending = new JCheckBox("Only use lisp indenting if the file name matches regex:",
 			getBooleanProperty("check_ending"));
 		file_endings = new JTextField(getProperty("file_endings_regex"));
 		

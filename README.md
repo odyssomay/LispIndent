@@ -80,7 +80,7 @@ This section describes specifically how each option works.
 #### File ending options
 
 These options controls for which files LispIndent should be activated.
-If `Only use LispIndent if file name matches:` is unchecked,
+If `Only use LispIndent if file name matches regex:` is unchecked,
 LispIndent is always used when the LispIndent actions are activated.
 
 If it is checked, and the file name matches the regular expression in the text box,
