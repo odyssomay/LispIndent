@@ -29,8 +29,8 @@ With LispIndent, it's possible to get a much more lispy indentation:
 1. Download the [plugin jar](https://github.com/odyssomay/LispIndent/blob/master/LispIndent.jar?raw=true).
 2. Put the jar in the `jars` folder in your [settings directory](http://www.jedit.org/users-guide/settings-directory.html).
 3. Start jEdit. You might have to enable LispIndent in `Plugins->Plugin manager...`.
-4. (optional) Set up [key bindings](#Key bindings).
-5. (optional) Set up indenting for your language by using a [preset](#Presets).
+4. (optional) Set up [key bindings](#key-bindings).
+5. (optional) Set up indenting for your language by using a [preset](#presets).
 
 If you only want to use LispIndent occasionally, indenting can be done from the menu in `Plugins->LispIndent`.
 
