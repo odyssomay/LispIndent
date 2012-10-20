@@ -70,7 +70,7 @@ To use a preset, click the `Use preset` button in the plugin options.
 
 If your language is not one of the available, use the `none` preset or
 manually configure LispIndent (see [Plugin options](#plugin-options) below).
-If you'd like your language to be available, please open an issue 
+If you'd like your language to be included, please open an issue 
 or contact [me](https://github.com/odyssomay).
 
 ### Plugin options
