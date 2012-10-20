@@ -36,7 +36,7 @@ If you only want to use LispIndent occasionally, indenting can be done from the 
 
 ### Upgrading
 
-To upgrade LispIndent to the latest version, repeat steps 1-3 in `Usage`.
+To upgrade LispIndent to the latest version, repeat steps 1-3 in [Getting started](#getting-started).
 
 ### Key bindings
 
