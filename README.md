@@ -104,6 +104,15 @@ The function argument indent looks like this:
         3 4 5)
 ```
 
+The first option - `By default, indent: ...`, simply sets which of these
+types of indenting is used normally.
+
+The `Indent two spaces if operator matches regex:`,
+`Indent to function arguments if operator matches regex:`
+and their corresponding text boxes, controls
+when the other type of indenting should be used instead
+('the other type' depends on the default indenting type).
+
 ### License
 
 LispIndent is licensed under the mit license:
