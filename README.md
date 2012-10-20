@@ -36,7 +36,8 @@ If you only want to use LispIndent occasionally, indenting can be done from the 
 
 ### Upgrading
 
-To upgrade LispIndent to the latest version, repeat steps 1-3 in [Getting started](#getting-started).
+To upgrade LispIndent to the latest version, 
+repeat steps 1-3 in [Getting started](#getting-started).
 
 ## Configuration
 
@@ -55,6 +56,10 @@ but this scheme is recommended:
 - `enter` for `LispIndent: Insert enter and indent`.
 - `ctrl + i` for `LispIndent: Indent`.
 
+If you use this scheme, you should also use a preset (see below) and/or
+configure the [file ending options](#plugin-options).
+Otherwise, LispIndent will also indent files that are not lisp files.
+
 ### Presets
 
 Different lisp languages is not automatically detected.
@@ -65,13 +70,21 @@ To use a preset, click the `Use preset` button in the plugin options.
 
 If your language is not one of the available, use the `none` preset or
 manually configure LispIndent (see [Plugin options](#plugin-options) below).
-If you'd like your language to be available, please contact [me](https://github.com/odyssomay).
+If you'd like your language to be available, please open an issue 
+or contact [me](https://github.com/odyssomay).
 
 ### Plugin options
 
+This section describes specifically how each option works.
+
 #### File ending options
 
-These options controls when LispIndent should be activated, and when it should not.
+These options controls for which files LispIndent should be activated.
+If `Only use LispIndent if file name matches:` is unchecked,
+LispIndent is always used when the LispIndent actions are activated.
+
+If it is checked, and the file name matches the regular expression in the text box,
+LispIndent is used. Otherwise, the in-built jEdit indenting is used. 
 
 #### Indent options
 
