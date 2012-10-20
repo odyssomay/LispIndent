@@ -12,7 +12,7 @@ However, for lisp code, it leads to very inadequate results such as:
     4 5 6)}
   b :is-b]
   b)
-``` 
+```
 
 With LispIndent, it's possible to get a much more lispy indentation:
 
@@ -29,17 +29,44 @@ With LispIndent, it's possible to get a much more lispy indentation:
 1. Download the [plugin jar](https://github.com/odyssomay/LispIndent/blob/master/LispIndent.jar?raw=true).
 2. Put the jar in the `jars` folder in your [settings directory](http://www.jedit.org/users-guide/settings-directory.html).
 3. Start jEdit. You might have to enable LispIndent in `Plugins->Plugin manager...`.
-4. (optional) Go to `Plugins->Plugin Options...`. Select `LispIndent`. Enable `Only use lisp indenting if the file name matches:`.
-5. (optional) Go to `Utilities->Global Options...`. Select `Shortcuts`. In the `Edit Shortcuts` drop-down list, choose `Plugin: LispIndent`.
-   Set `LispIndent: Insert newline and indent` to enter, and `LispIndent: Indent` to ctrl+i.
-
-If you don't use enter and ctrl+i in step 5, you don't have to do step 4.
+4. (optional) Set up [key bindings](#Key bindings).
+5. (optional) Set up indenting for your language by using a [preset](#Presets).
 
 If you only want to use LispIndent occasionally, indenting can be done from the menu in `Plugins->LispIndent`.
 
 ### Upgrading
 
 To upgrade LispIndent to the latest version, repeat steps 1-3 in `Usage`.
+
+### Key bindings
+
+### Presets
+
+### Configuration
+
+All configuration is done in `Plugins->Plugin Options...`. Select `LispIndent`.
+
+#### File ending options
+
+These options controls when LispIndent should be activated, and when it should not.
+
+#### Indent options
+
+These options controls when to use "two space indent", and when to use "function argument indent".
+
+The two space indent looks like this:
+
+```clojure
+(blabla 1 2
+  3 4 5)
+```
+
+The function argument indent looks like this:
+
+```clojure
+(blabla 1 2
+        3 4 5)
+```
 
 ### License
 
