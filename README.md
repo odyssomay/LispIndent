@@ -24,7 +24,7 @@ With LispIndent, it's possible to get a much more lispy indentation:
   b)
 ```
 
-### Installing
+### Getting started
 
 1. Download the [plugin jar](https://github.com/odyssomay/LispIndent/blob/master/LispIndent.jar?raw=true).
 2. Put the jar in the `jars` folder in your [settings directory](http://www.jedit.org/users-guide/settings-directory.html).
