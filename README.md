@@ -41,8 +41,8 @@ repeat steps 1-3 in [Getting started](#getting-started).
 
 ## Configuration
 
-Most configuration is done in the `Plugin Options` tab of the `Optiions` dialog.
-They can be accessed in `Plugins->Plugin Options...`, and select `LispIndent`.
+Most configuration is done in the `Plugin Options` tab of the `Options` dialog.
+Access this by the `Plugins->Plugin Options...` menu item and then select `LispIndent`.
 
 ### Key bindings
 
