@@ -41,8 +41,8 @@ repeat steps 1-3 in [Getting started](#getting-started).
 
 ## Configuration
 
-Most configuration is done in the plugin options.
-They can be accessed in `Plugins->Plugin Options...`, select `LispIndent`.
+Most configuration is done in the `Plugin Options` tab of the `Optiions` dialog.
+They can be accessed in `Plugins->Plugin Options...`, and select `LispIndent`.
 
 ### Key bindings
 
@@ -51,19 +51,19 @@ To do this, go to `Utilities->Global Options...`. Select `Shortcuts`.
 In the `Edit Shortcuts` drop-down list, select `Plugin: LispIndent`.
 
 You can of course use any key you like for the LispIndent actions,
-but this scheme is recommended:
+but the following shortcuts are recommended:
 
-- `enter` for `LispIndent: Insert enter and indent`.
 - `ctrl + i` for `LispIndent: Indent`.
+- `enter` for `LispIndent: Insert enter and indent`.
 
-If you use this scheme, you should also use a preset (see below) and/or
+If you use those keyboard shorcuts, you should also use a *preset* (see next section) and/or
 configure the [file ending options](#plugin-options).
 Otherwise, LispIndent will also indent files that are not lisp files.
 
 ### Presets
 
 Different lisp languages is not automatically detected.
-There are however presets that tailors the indenting specifically
+There are however presets that tailor the indenting specifically
 for a certain language.
 
 To use a preset, click the `Use preset` button in the plugin options.
@@ -79,16 +79,17 @@ This section describes specifically how each option works.
 
 #### File ending options
 
-These options controls for which files LispIndent should be activated.
+This option controls for which files LispIndent should be activated.
 If `Only use LispIndent if file name matches regex:` is unchecked,
-LispIndent is always used when the LispIndent actions are activated.
+LispIndent is always used (regardless of filetype) when the LispIndent actions are activated.
 
 If it is checked, and the file name matches the regular expression in the text box,
-LispIndent is used. Otherwise, the in-built jEdit indenting is used. 
+LispIndent is used. Otherwise, the built-in jEdit indenting is used. 
 
 #### Indent options
 
-These options controls when to use "two space indent", and when to use "function argument indent".
+These options control when to use "two space indent", and when to use "function argument indent"
+(vertically-align function arguments).
 
 The two space indent looks like this:
 
@@ -104,18 +105,18 @@ The function argument indent looks like this:
         3 4 5)
 ```
 
-The first option - `By default, indent: ...`, simply sets which of these
+The first option --- the `By default, indent: ...` radio buttons --- simply sets which of these
 types of indenting is used normally.
 
 The `Indent two spaces if operator matches regex:`,
-`Indent to function arguments if operator matches regex:`
-and their corresponding text boxes, controls
-when the other type of indenting should be used instead
-('the other type' depends on the default indenting type).
+`Indent to function arguments if operator matches regex:`,
+and their corresponding text boxes, specify the special cases
+where the *other* type of indenting should be used instead
+("the other type" depends on the default indenting type).
 
 ### License
 
-LispIndent is licensed under the mit license:
+LispIndent is licensed under the MIT license:
 
 > Copyright (C) 2012 Jonathan Fischer Friberg
 > 
