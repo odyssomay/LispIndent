@@ -98,7 +98,7 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 	
 	void show_webpage_dialog() {
 		JTextArea ta = new JTextArea(1, 40);
-		ta.setText("https://github.com/odyssomay/LispIndent");
+		ta.setText("https://github.com/odyssomay/LispIndent#readme");
 		ta.setEditable(false);
 		JOptionPane.showMessageDialog(getComponent(), ta);
 	}
@@ -110,7 +110,7 @@ public class LispIndentOptionPane extends AbstractOptionPane {
 				java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
 				if(desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
 					try {
-						java.net.URI uri = new java.net.URI("https://github.com/odyssomay/LispIndent");
+						java.net.URI uri = new java.net.URI("https://github.com/odyssomay/LispIndent#readme");
 						desktop.browse(uri);
 					}
 					catch(Exception e) { show_webpage_dialog(); }
