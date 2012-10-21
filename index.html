@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Lispindent : A plugin for jEdit that properly indents lisp code." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Lispindent</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/odyssomay/LispIndent">View on GitHub</a>
+
+          <h1 id="project_title">Lispindent</h1>
+          <h2 id="project_tagline">A plugin for jEdit that properly indents lisp code.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/odyssomay/LispIndent/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/odyssomay/LispIndent/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>LispIndent</h2>
+
+<p>A plugin for <a href="http://www.jedit.org/">jEdit</a> that properly indents lisp code.
+It's targeted to clojure users, but should be usable for other lisp dialects as well.</p>
+
+<p>The in-built indenter in jEdit is very simplistic, and for good reasons!
+However, for lisp code, it leads to very inadequate results such as:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">{</span><span class="ss">:bla</span> <span class="mi">3</span>
+  <span class="ss">:bla2</span> <span class="o">'</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span>
+    <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">)}</span>
+  <span class="nv">b</span> <span class="ss">:is-b</span><span class="p">]</span>
+  <span class="nv">b</span><span class="p">)</span>
+</pre></div>
+
+<p>With LispIndent, it's possible to get a much more lispy indentation:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">{</span><span class="ss">:bla</span> <span class="mi">3</span>
+         <span class="ss">:bla2</span> <span class="o">'</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span>
+                 <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">)}</span>
+      <span class="nv">b</span> <span class="ss">:is-b</span><span class="p">]</span>
+  <span class="nv">b</span><span class="p">)</span>
+</pre></div>
+
+<h2>Getting started</h2>
+
+<ol>
+<li>Download the <a href="https://github.com/odyssomay/LispIndent/blob/master/LispIndent.jar?raw=true">plugin jar</a>.</li>
+<li>Put the jar in the <code>jars</code> folder in your <a href="http://www.jedit.org/users-guide/settings-directory.html">settings directory</a>.</li>
+<li>Start jEdit. You might have to enable LispIndent in <code>Plugins-&gt;Plugin manager...</code>.</li>
+<li>(optional) Set up <a href="#key-bindings">key bindings</a>.</li>
+<li>(optional) Set up indenting for your language by using a <a href="#presets">preset</a>.</li>
+</ol><p>If you only want to use LispIndent occasionally, indenting can be done from the menu in <code>Plugins-&gt;LispIndent</code>.</p>
+
+<h3>Upgrading</h3>
+
+<p>To upgrade LispIndent to the latest version, 
+repeat steps 1-3 in <a href="#getting-started">Getting started</a>.</p>
+
+<h2>Configuration</h2>
+
+<p>Most configuration is done in the plugin options.
+They can be accessed in <code>Plugins-&gt;Plugin Options...</code>, select <code>LispIndent</code>.</p>
+
+<h3>Key bindings</h3>
+
+<p>LispIndent does not automatically set up key bindings.
+To do this, go to <code>Utilities-&gt;Global Options...</code>. Select <code>Shortcuts</code>.
+In the <code>Edit Shortcuts</code> drop-down list, select <code>Plugin: LispIndent</code>.</p>
+
+<p>You can of course use any key you like for the LispIndent actions,
+but this scheme is recommended:</p>
+
+<ul>
+<li>
+<code>enter</code> for <code>LispIndent: Insert enter and indent</code>.</li>
+<li>
+<code>ctrl + i</code> for <code>LispIndent: Indent</code>.</li>
+</ul><p>If you use this scheme, you should also use a preset (see below) and/or
+configure the <a href="#plugin-options">file ending options</a>.
+Otherwise, LispIndent will also indent files that are not lisp files.</p>
+
+<h3>Presets</h3>
+
+<p>Different lisp languages is not automatically detected.
+There are however presets that tailors the indenting specifically
+for a certain language.</p>
+
+<p>To use a preset, click the <code>Use preset</code> button in the plugin options.</p>
+
+<p>If your language is not one of the available, use the <code>none</code> preset or
+manually configure LispIndent (see <a href="#plugin-options">Plugin options</a> below).
+If you'd like your language to be included, please open an issue 
+or contact <a href="https://github.com/odyssomay">me</a>.</p>
+
+<h3>Plugin options</h3>
+
+<p>This section describes specifically how each option works.</p>
+
+<h4>File ending options</h4>
+
+<p>These options controls for which files LispIndent should be activated.
+If <code>Only use LispIndent if file name matches regex:</code> is unchecked,
+LispIndent is always used when the LispIndent actions are activated.</p>
+
+<p>If it is checked, and the file name matches the regular expression in the text box,
+LispIndent is used. Otherwise, the in-built jEdit indenting is used. </p>
+
+<h4>Indent options</h4>
+
+<p>These options controls when to use "two space indent", and when to use "function argument indent".</p>
+
+<p>The two space indent looks like this:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="nf">blabla</span> <span class="mi">1</span> <span class="mi">2</span>
+  <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+<p>The function argument indent looks like this:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="nf">blabla</span> <span class="mi">1</span> <span class="mi">2</span>
+        <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+<p>The first option - <code>By default, indent: ...</code>, simply sets which of these
+types of indenting is used normally.</p>
+
+<p>The <code>Indent two spaces if operator matches regex:</code>,
+<code>Indent to function arguments if operator matches regex:</code>
+and their corresponding text boxes, controls
+when the other type of indenting should be used instead
+('the other type' depends on the default indenting type).</p>
+
+<h3>License</h3>
+
+<p>LispIndent is licensed under the mit license:</p>
+
+<blockquote>
+<p>Copyright (C) 2012 Jonathan Fischer Friberg</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</blockquote>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Lispindent maintained by <a href="https://github.com/odyssomay">odyssomay</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
