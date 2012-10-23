@@ -89,7 +89,9 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		String line_str; 
 		char c;
 		for(int line = start_line; line >= 0; line--) {
-			line_str = buffer.getLineText(line);
+			line_str = buffer.getLineText(line).replaceAll(
+				" \\\\[\\(\\)\\[\\]\\{\\}] ", "    ").replaceAll(
+				";.*$", "");
 			for(int i = line_str.length() - 1; i >= 0; i--) {
 				c = line_str.charAt(i);
 				if(c == '"') { in_str = !in_str; }
