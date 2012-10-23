@@ -46,8 +46,9 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		return buffer.getText(start_index, (end_index + 1) - start_index);
 	}
 	
-	static int get_parenthesis_indent(JEditBuffer buffer, int index) {
-		int line_offset = get_line_offset(buffer, index);
+	static int get_parenthesis_indent(JEditBuffer buffer, int line, int line_offset) {
+		//int line_offset = get_line_offset(buffer, index);
+		int index = buffer.getLineStartOffset(line) + line_offset;
 		String op = get_operator(buffer, index);
 		if(getBooleanProperty("use_defun_indent_by_default")) {
 			if(getBooleanProperty("check_pattern_for_align_indent") &&
@@ -65,7 +66,8 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		}
 	}
 	
-	static int get_bracket_indent(JEditBuffer buffer, int index) { return get_line_offset(buffer, index) + 1; }
+	static int get_bracket_indent(JEditBuffer buffer, int index) //{ return get_line_offset(buffer, index) + 1; }
+	{ return index + 1; }
 	
 	static int get_indent_of_line(JEditBuffer buffer, int line) {
 		int i = buffer.getLineStartOffset(line);
@@ -77,37 +79,45 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		return sum;
 	}
 	
-	static int get_indent(int start, JEditBuffer buffer) {
-		if(start < 0) { return 0; }
-		int start_line = buffer.getLineOfOffset(start);
-		int current_line_start = buffer.getLineStartOffset(start_line);
+	static int get_indent(int start_line, JEditBuffer buffer) {
+		if(start_line < 0) { return 0; }
+		//int start_line = buffer.getLineOfOffset(start);
 		int br = 0;       // bracket count
 		int cbr = 0;      // curly bracket count
 		int pa = 0;       // parenthesis count
 		boolean in_str = false;
-		String c;
-		for(int i = start; i >= 0; i--) {
-			c = buffer.getText(i, 1);
-			if(c.equals("\"")) { in_str = !in_str; }
-			if(!in_str) {
-				// update counts
-				if(c.equals("("))      { pa += 1; }
-				else if(c.equals(")")) { pa -= 1; }
-				else if(c.equals("[")) { br += 1; }
-				else if(c.equals("]")) { br -= 1; }
-				else if(c.equals("{")) { cbr += 1; }
-				else if(c.equals("}")) { cbr -= 1; }
-				// check counts for possible indenting
-				if(br > 0 || cbr > 0) { return get_bracket_indent(buffer, i); }
-				else if(pa > 0) {
-					if(i != 0 && buffer.getText(i - 1, 1).equals("'")) { // indent as list
-						return get_bracket_indent(buffer, i);
+		String line_str; 
+		char c;
+		for(int line = start_line; line >= 0; line--) {
+			line_str = buffer.getLineText(line).replaceAll(
+				" \\\\[\\(\\)\\[\\]\\{\\}] ", "    ").replaceAll(
+				";.*$", "");
+			for(int i = line_str.length() - 1; i >= 0; i--) {
+				c = line_str.charAt(i);
+				if(c == '"') { in_str = !in_str; }
+				if(!in_str) {
+					// update counts
+					switch(c) {
+						case '(': pa  += 1; break;
+						case ')': pa  -= 1; break;
+						case '[': br  += 1; break;
+						case ']': br  -= 1; break;
+						case '{': cbr += 1; break;
+						case '}': cbr -= 1; break;
+						default: break;
 					}
-					else { return get_parenthesis_indent(buffer, i); }   // indent as function call
+					// check counts for possible indenting
+					if(br > 0 || cbr > 0) { return get_bracket_indent(buffer, i); }
+					else if(pa > 0) {
+						if(i != 0 && line_str.charAt(i - 1) == '\'') { // indent as list
+							return get_bracket_indent(buffer, i);
+						}
+						else { return get_parenthesis_indent(buffer, line, i); }   // indent as function call
+					}
 				}
-				else if(c.equals("\n") && br == 0 && cbr == 0 && pa == 0) {
-					return get_indent_of_line(buffer, buffer.getLineOfOffset(i + 1));
-				}
+			}
+			if(br == 0 && cbr == 0 && pa == 0) {
+				return get_indent_of_line(buffer, line);
 			}
 		}
 		return 0;
@@ -124,7 +134,7 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		int current_indent = get_indent_of_line(buffer, line);
 		buffer.remove(line_start, current_indent);
 		// we need "- 2" here to "skip" the newline
-		buffer.insert(line_start, build_indent_string(get_indent(line_start - 2, buffer)));
+		buffer.insert(line_start, build_indent_string(get_indent(line - 1, buffer)));
 	}
 	
 	public static void indent(Buffer buffer, TextArea textArea) {
@@ -144,8 +154,8 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		if(should_use_lisp_indent(buffer)) {
 			buffer.beginCompoundEdit();
 			// we need "- 1" here to skip the newline (if the caret is at the end of a line)
-			int indent = get_indent(textArea.getCaretPosition() - 1, buffer);
 			buffer.insert(textArea.getCaretPosition(), "\n");
+			int indent = get_indent(textArea.getCaretLine() - 1, buffer);
 			buffer.insert(textArea.getCaretPosition(), build_indent_string(indent));
 			buffer.beginCompoundEdit();
 		}
