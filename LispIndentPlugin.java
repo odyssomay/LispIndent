@@ -84,26 +84,30 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		int br = 0;       // bracket count
 		int cbr = 0;      // curly bracket count
 		int pa = 0;       // parenthesis count
+		boolean in_str = false;
 		String c;
 		for(int i = start; i >= 0; i--) {
 			c = buffer.getText(i, 1);
-			// update counts
-			if(c.equals("("))      { pa += 1; }
-			else if(c.equals(")")) { pa -= 1; }
-			else if(c.equals("[")) { br += 1; }
-			else if(c.equals("]")) { br -= 1; }
-			else if(c.equals("{")) { cbr += 1; }
-			else if(c.equals("}")) { cbr -= 1; }
-			// check counts for possible indenting
-			if(br > 0 || cbr > 0) { return get_bracket_indent(buffer, i); }
-			else if(pa > 0) {
-				if(i != 0 && buffer.getText(i - 1, 1).equals("'")) { // indent as list
-					return get_bracket_indent(buffer, i);
+			if(c.equals("\"")) { in_str = !in_str; }
+			if(!in_str) {
+				// update counts
+				if(c.equals("("))      { pa += 1; }
+				else if(c.equals(")")) { pa -= 1; }
+				else if(c.equals("[")) { br += 1; }
+				else if(c.equals("]")) { br -= 1; }
+				else if(c.equals("{")) { cbr += 1; }
+				else if(c.equals("}")) { cbr -= 1; }
+				// check counts for possible indenting
+				if(br > 0 || cbr > 0) { return get_bracket_indent(buffer, i); }
+				else if(pa > 0) {
+					if(i != 0 && buffer.getText(i - 1, 1).equals("'")) { // indent as list
+						return get_bracket_indent(buffer, i);
+					}
+					else { return get_parenthesis_indent(buffer, i); }   // indent as function call
 				}
-				else { return get_parenthesis_indent(buffer, i); }   // indent as function call
-			}
-			else if(c.equals("\n") && br == 0 && cbr == 0 && pa == 0) {
-				return get_indent_of_line(buffer, buffer.getLineOfOffset(i + 1));
+				else if(c.equals("\n") && br == 0 && cbr == 0 && pa == 0) {
+					return get_indent_of_line(buffer, buffer.getLineOfOffset(i + 1));
+				}
 			}
 		}
 		return 0;
