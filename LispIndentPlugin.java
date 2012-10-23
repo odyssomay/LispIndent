@@ -157,7 +157,7 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 			buffer.insert(textArea.getCaretPosition(), "\n");
 			int indent = get_indent(textArea.getCaretLine() - 1, buffer);
 			buffer.insert(textArea.getCaretPosition(), build_indent_string(indent));
-			buffer.beginCompoundEdit();
+			buffer.endCompoundEdit();
 		}
 		else { textArea.insertEnterAndIndent(); }
 	}
