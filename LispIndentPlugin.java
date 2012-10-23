@@ -90,7 +90,7 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		char c;
 		for(int line = start_line; line >= 0; line--) {
 			line_str = buffer.getLineText(line).replaceAll(
-				" \\\\[\\(\\)\\[\\]\\{\\}] ", "    ").replaceAll(
+				"\\\\[\\(\\)\\[\\]\\{\\}]", "  ").replaceAll(
 				";.*$", "");
 			for(int i = line_str.length() - 1; i >= 0; i--) {
 				c = line_str.charAt(i);
