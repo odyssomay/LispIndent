@@ -142,10 +142,12 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	
 	public static void insert_enter_and_indent(Buffer buffer, TextArea textArea) {
 		if(should_use_lisp_indent(buffer)) {
+			buffer.beginCompoundEdit();
 			// we need "- 1" here to skip the newline (if the caret is at the end of a line)
 			int indent = get_indent(textArea.getCaretPosition() - 1, buffer);
 			buffer.insert(textArea.getCaretPosition(), "\n");
 			buffer.insert(textArea.getCaretPosition(), build_indent_string(indent));
+			buffer.beginCompoundEdit();
 		}
 		else { textArea.insertEnterAndIndent(); }
 	}
