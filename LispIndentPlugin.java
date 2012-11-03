@@ -47,7 +47,6 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	}
 	
 	static int get_parenthesis_indent(JEditBuffer buffer, int line, int line_offset) {
-		//int line_offset = get_line_offset(buffer, index);
 		int index = buffer.getLineStartOffset(line) + line_offset;
 		String op = get_operator(buffer, index);
 		if(getBooleanProperty("use_defun_indent_by_default")) {
@@ -66,8 +65,7 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		}
 	}
 	
-	static int get_bracket_indent(JEditBuffer buffer, int index) //{ return get_line_offset(buffer, index) + 1; }
-	{ return index + 1; }
+	static int get_bracket_indent(JEditBuffer buffer, int index) { return index + 1; }
 	
 	static int get_indent_of_line(JEditBuffer buffer, int line) {
 		int i = buffer.getLineStartOffset(line);
@@ -84,7 +82,6 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	
 	static int get_indent(int start_line, JEditBuffer buffer) {
 		if(start_line < 0) { return 0; }
-		//int start_line = buffer.getLineOfOffset(start);
 		int br = 0;       // bracket count
 		int cbr = 0;      // curly bracket count
 		int pa = 0;       // parenthesis count
@@ -139,7 +136,6 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 		int line_start = buffer.getLineStartOffset(line);
 		int current_indent = get_indent_of_line(buffer, line);
 		buffer.remove(line_start, current_indent);
-		// we need "- 2" here to "skip" the newline
 		buffer.insert(line_start, build_indent_string(get_indent(line - 1, buffer)));
 	}
 	
@@ -159,7 +155,6 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	public static void insert_enter_and_indent(Buffer buffer, TextArea textArea) {
 		if(should_use_lisp_indent(buffer)) {
 			buffer.beginCompoundEdit();
-			// we need "- 1" here to skip the newline (if the caret is at the end of a line)
 			buffer.insert(textArea.getCaretPosition(), "\n");
 			int indent = get_indent(textArea.getCaretLine() - 1, buffer);
 			buffer.insert(textArea.getCaretPosition(), build_indent_string(indent));
