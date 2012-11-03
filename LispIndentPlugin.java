@@ -72,9 +72,12 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 	static int get_indent_of_line(JEditBuffer buffer, int line) {
 		int i = buffer.getLineStartOffset(line);
 		int sum = 0;
-		while(buffer.getText(i, 1).equals(" ")) {
-			sum += 1;
-			i += 1;
+		int end = buffer.getLength();
+		for(; i < end; i++) {
+			if(buffer.getText(i, 1).equals(" ")) {
+				sum += 1;
+			}
+			else { break; }
 		}
 		return sum;
 	}
