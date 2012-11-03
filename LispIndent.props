@@ -2,7 +2,7 @@
 plugin.LispIndentPlugin.activate=startup
 plugin.LispIndentPlugin.name=LispIndent
 plugin.LispIndentPlugin.author=Jonathan Fischer Friberg
-plugin.LispIndentPlugin.version=1.3
+plugin.LispIndentPlugin.version=1.4
 # depends on jEdit 4.4.1
 plugin.LispIndentPlugin.depend.0=jedit 04.04.99.01
 plugin.LispIndentPlugin.description=Properly indents lisp code on newline.
