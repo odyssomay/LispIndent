@@ -115,6 +115,9 @@ public class LispIndentPlugin extends org.gjt.sp.jedit.EditPlugin {
 						if(i != 0 && line_str.charAt(i - 1) == '\'') { // indent as list
 							return get_bracket_indent(buffer, i);
 						}
+						else if(i < line_str.length() - 1 && line_str.charAt(i + 1) == '[') {
+							return get_bracket_indent(buffer, i);
+						}
 						else { return get_parenthesis_indent(buffer, line, i); }   // indent as function call
 					}
 				}
